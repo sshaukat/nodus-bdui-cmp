@@ -1,6 +1,6 @@
-# bduiRuntime
+# nodus-parser
 
-`bduiRuntime` is the reusable Compose Multiplatform runtime module for Nodus BDUI sandbox flows.
+`nodus-parser` is the reusable Compose Multiplatform runtime module for Nodus BDUI sandbox flows.
 
 The module is intentionally placed outside the app folder so that JSON schema parsing and rendering stay physically separated from the host application shell.
 

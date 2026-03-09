@@ -25,7 +25,7 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation(project(":bduiRuntime"))
+            implementation(project(":nodus-parser"))
             api(libs.compose.runtime)
             api(libs.compose.ui)
             api(libs.compose.foundation)

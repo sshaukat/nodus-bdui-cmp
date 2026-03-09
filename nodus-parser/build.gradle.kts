@@ -42,7 +42,7 @@ kotlin {
         .configureEach {
             binaries {
                 framework {
-                    baseName = "BduiRuntime"
+                    baseName = "NodusParser"
                     isStatic = true
                 }
             }

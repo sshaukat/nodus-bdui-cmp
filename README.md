@@ -10,7 +10,7 @@
 - `nodus-app/desktopApp/` — Desktop launcher
 - `nodus-app/webApp/` — Web launcher
 - `nodus-app/iosApp/` — iOS launcher
-- `bduiRuntime/` — отдельный runtime-модуль для парсинга и рендера JSON-схем
+- `nodus-parser/` — отдельный runtime-модуль для парсинга и рендера JSON-схем
 
 В этом репозитории sandbox-приложение используется как тестовый клиент для сценария:
 
@@ -66,4 +66,4 @@
 
 1. Корневой `.gitignore` настроен для Gradle/KMP, IDE и platform build artifacts.
 2. Вложенный `nodus-app/README.MD` описывает базовые команды sandbox-приложения.
-3. Реализация runtime-библиотеки вынесена в отдельный каталог `bduiRuntime/` на уровне репозитория.
+3. Реализация runtime-библиотеки вынесена в отдельный каталог `nodus-parser/` на уровне репозитория.

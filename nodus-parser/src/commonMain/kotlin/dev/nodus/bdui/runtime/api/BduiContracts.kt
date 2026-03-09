@@ -56,7 +56,7 @@ interface BduiRuntimeEngine {
 }
 
 object BduiRuntimeMetadata {
-    const val moduleName: String = "bduiRuntime"
+    const val moduleName: String = "nodus-parser"
     const val version: String = "0.1.0"
 }
 

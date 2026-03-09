@@ -29,8 +29,8 @@ dependencyResolutionManagement {
     }
 }
 include(":sharedUI")
-include(":bduiRuntime")
-project(":bduiRuntime").projectDir = file("../bduiRuntime")
+include(":nodus-parser")
+project(":nodus-parser").projectDir = file("../nodus-parser")
 include(":androidApp")
 include(":desktopApp")
 include(":webApp")
