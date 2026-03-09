@@ -28,6 +28,13 @@
 2. добавить экран рендера по кнопке `Построить`;
 3. выделить внутри приложения reusable CMP runtime library для parse/validate/render pipeline.
 
+Текущее состояние MVP:
+
+1. selector screen реализован;
+2. build-to-render flow работает;
+3. по умолчанию sandbox использует `FakeRegistryGateway`;
+4. в кодовой базе уже есть `HttpRegistryGateway` для подключения к реальному backend registry API.
+
 ## Запуск
 
 Все команды выполняются из каталога `nodus-bduiI-app/`.
@@ -58,4 +65,4 @@
 
 1. Корневой `.gitignore` настроен для Gradle/KMP, IDE и platform build artifacts.
 2. Вложенный `nodus-bduiI-app/README.MD` описывает базовые команды шаблона приложения.
-3. Реализация runtime-библиотеки пока не добавлена и будет вноситься по PRD 06.
+3. Реализация runtime-библиотеки добавлена как модуль `nodus-bduiI-app/bduiRuntime`.

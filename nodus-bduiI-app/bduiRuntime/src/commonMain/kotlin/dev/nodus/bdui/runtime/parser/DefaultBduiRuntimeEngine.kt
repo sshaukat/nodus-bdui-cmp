@@ -42,6 +42,7 @@ class DefaultBduiRuntimeEngine : BduiRuntimeEngine {
     override fun parse(rawJson: String, preferredSchemaVersion: String?): BduiParseResult {
         val decodeErrors = mutableListOf<BduiParseDiagnostic>()
         val validationErrors = mutableListOf<BduiParseDiagnostic>()
+        val warnings = mutableListOf<BduiParseDiagnostic>()
 
         val element = try {
             json.parseToJsonElement(rawJson)
@@ -59,7 +60,16 @@ class DefaultBduiRuntimeEngine : BduiRuntimeEngine {
             )
         }
 
-        val node = parseNode(element, "$", decodeErrors)
+        val appliedSchemaVersion = preferredSchemaVersion ?: inferSchemaVersion(element) ?: "v0_2"
+        if (preferredSchemaVersion == null && inferSchemaVersion(element) == null) {
+            warnings += BduiParseDiagnostic(
+                severity = BduiDiagnosticSeverity.Warning,
+                path = "$.schemaVersion",
+                message = "schemaVersion is missing, fallback v0_2 was applied",
+            )
+        }
+
+        val node = parseNode(element, "$", decodeErrors, warnings)
         if (node != null) {
             validationErrors += validateNode(node)
         }
@@ -68,7 +78,8 @@ class DefaultBduiRuntimeEngine : BduiRuntimeEngine {
             node = node,
             decodeErrors = decodeErrors,
             validationErrors = validationErrors,
-            appliedSchemaVersion = preferredSchemaVersion ?: inferSchemaVersion(element),
+            warnings = warnings,
+            appliedSchemaVersion = appliedSchemaVersion,
         )
     }
 
@@ -87,6 +98,7 @@ class DefaultBduiRuntimeEngine : BduiRuntimeEngine {
         element: JsonElement,
         path: String,
         errors: MutableList<BduiParseDiagnostic>,
+        warnings: MutableList<BduiParseDiagnostic>,
     ): BduiNode? {
         if (element !is JsonObject) {
             errors += error(path, "Node must be an object")
@@ -105,9 +117,9 @@ class DefaultBduiRuntimeEngine : BduiRuntimeEngine {
         val layout = parseLayout(element["layout"])
 
         return when (type) {
-            "column" -> BduiColumnNode(id, visible, enabled, layout, parseChildren(element["children"], "$path.children", errors))
-            "row" -> BduiRowNode(id, visible, enabled, layout, parseChildren(element["children"], "$path.children", errors))
-            "box" -> BduiBoxNode(id, visible, enabled, layout, parseChildren(element["children"], "$path.children", errors))
+            "column" -> BduiColumnNode(id, visible, enabled, layout, parseChildren(element["children"], "$path.children", errors, warnings))
+            "row" -> BduiRowNode(id, visible, enabled, layout, parseChildren(element["children"], "$path.children", errors, warnings))
+            "box" -> BduiBoxNode(id, visible, enabled, layout, parseChildren(element["children"], "$path.children", errors, warnings))
             "text" -> {
                 val value = element.string("value")
                 if (value.isNullOrBlank()) {
@@ -139,7 +151,14 @@ class DefaultBduiRuntimeEngine : BduiRuntimeEngine {
             )
 
             "spacer" -> BduiSpacerNode(id, visible, enabled, layout)
-            else -> BduiUnsupportedNode(id, visible, enabled, layout, type)
+            else -> {
+                warnings += BduiParseDiagnostic(
+                    severity = BduiDiagnosticSeverity.Warning,
+                    path = path,
+                    message = "Unsupported node type: $type",
+                )
+                BduiUnsupportedNode(id, visible, enabled, layout, type)
+            }
         }
     }
 
@@ -147,6 +166,7 @@ class DefaultBduiRuntimeEngine : BduiRuntimeEngine {
         element: JsonElement?,
         path: String,
         errors: MutableList<BduiParseDiagnostic>,
+        warnings: MutableList<BduiParseDiagnostic>,
     ): List<BduiNode> {
         if (element == null || element is JsonNull) {
             return emptyList()
@@ -155,7 +175,7 @@ class DefaultBduiRuntimeEngine : BduiRuntimeEngine {
             errors += error(path, "'children' must be an array")
             return emptyList()
         }
-        return element.mapIndexedNotNull { index, child -> parseNode(child, "$path[$index]", errors) }
+        return element.mapIndexedNotNull { index, child -> parseNode(child, "$path[$index]", errors, warnings) }
     }
 
     private fun parseLayout(element: JsonElement?): BduiLayout? {
@@ -252,9 +272,26 @@ class DefaultBduiRuntimeEngine : BduiRuntimeEngine {
             }
 
             when (current) {
-                is BduiButtonNode -> if (current.title.isBlank()) errors += error(path, "Button title must not be blank")
-                is BduiInputNode -> if (current.id.isNullOrBlank()) errors += error(path, "Input node requires non-empty id")
+                is BduiButtonNode -> {
+                    if (current.title.isBlank()) {
+                        errors += error(path, "Button title must not be blank")
+                    }
+                    when (val action = current.action) {
+                        is BduiNavigateAction -> validateNavigateAction(action, "$path.action", errors)
+                        else -> Unit
+                    }
+                }
+                is BduiInputNode -> {
+                    if (current.id.isNullOrBlank()) {
+                        errors += error(path, "Input node requires non-empty id")
+                    }
+                    when (val action = current.onChange) {
+                        is BduiNavigateAction -> validateNavigateAction(action, "$path.onChange", errors)
+                        else -> Unit
+                    }
+                }
                 is BduiTextNode -> if (current.value.isBlank()) errors += error(path, "Text value must not be blank")
+                is BduiUnsupportedNode -> errors += error(path, "Unsupported node type cannot be rendered safely: ${current.sourceType}")
                 is BduiColumnNode -> current.children.forEachIndexed { index, child -> visit(child, "$path.children[$index]") }
                 is BduiRowNode -> current.children.forEachIndexed { index, child -> visit(child, "$path.children[$index]") }
                 is BduiBoxNode -> current.children.forEachIndexed { index, child -> visit(child, "$path.children[$index]") }
@@ -277,4 +314,17 @@ class DefaultBduiRuntimeEngine : BduiRuntimeEngine {
         path = path,
         message = message,
     )
+
+    private fun validateNavigateAction(
+        action: BduiNavigateAction,
+        path: String,
+        errors: MutableList<BduiParseDiagnostic>,
+    ) {
+        if (action.route == "back") {
+            return
+        }
+        if (!action.route.startsWith("/")) {
+            errors += error(path, "navigate.route must be '/path' or 'back'")
+        }
+    }
 }

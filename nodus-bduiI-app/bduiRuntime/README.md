@@ -21,6 +21,26 @@ Main entry points live under `dev.nodus.bdui.runtime.api`:
 - `BduiActionDispatcher`
 - `BduiScreen`
 
+## Current support matrix
+
+Supported nodes:
+
+1. `column`
+2. `row`
+3. `box`
+4. `text`
+5. `button`
+6. `input`
+7. `spacer`
+
+Supported actions:
+
+1. `log`
+2. `open_url`
+3. `navigate`
+
+Unsupported nodes currently produce diagnostics and fallback rendering.
+
 ## Host boundary
 
 The host app is responsible for:

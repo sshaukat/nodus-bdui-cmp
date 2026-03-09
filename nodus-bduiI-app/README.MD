@@ -5,6 +5,13 @@ This sandbox now targets a two-layer setup:
 - `sharedUI` as the application shell;
 - `bduiRuntime` as the reusable Compose Multiplatform runtime module for backend-driven schemas.
 
+Current sandbox flow:
+
+1. select `project / contract / version / screen`;
+2. press `Build`;
+3. parse JSON locally via `bduiRuntime`;
+4. render the form on the next screen with debug action log.
+
 ### Android
 To run the application on android device/emulator:  
  - open project in Android Studio and run imported android run configuration  
@@ -35,3 +42,13 @@ Run the browser application: `./gradlew :webApp:wasmJsBrowserDevelopmentRun`
 ### Runtime Module
 
 Run runtime tests: `./gradlew :bduiRuntime:allTests`
+
+### Sandbox Smoke
+
+Recommended local smoke checks:
+
+- `./gradlew :bduiRuntime:jvmTest`
+- `./gradlew :sharedUI:jvmTest`
+- `./gradlew :androidApp:compileDebugKotlin`
+- `./gradlew :desktopApp:compileKotlin`
+- `./gradlew :webApp:compileKotlinJs`
