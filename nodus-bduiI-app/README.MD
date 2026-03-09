@@ -1,5 +1,10 @@
 # Nodus BDUI App
 
+This sandbox now targets a two-layer setup:
+
+- `sharedUI` as the application shell;
+- `bduiRuntime` as the reusable Compose Multiplatform runtime module for backend-driven schemas.
+
 ### Android
 To run the application on android device/emulator:  
  - open project in Android Studio and run imported android run configuration  
@@ -27,3 +32,6 @@ Run the browser application: `./gradlew :webApp:jsBrowserDevelopmentRun`
 ### Wasm Browser
 Run the browser application: `./gradlew :webApp:wasmJsBrowserDevelopmentRun`  
 
+### Runtime Module
+
+Run runtime tests: `./gradlew :bduiRuntime:allTests`

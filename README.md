@@ -1,0 +1,61 @@
+# Nodus BDUI CMP
+
+Репозиторий для CMP-песочницы Nodus и будущей библиотеки runtime для рендера backend-driven JSON-схем форм.
+
+## Структура
+
+- `nodus-bduiI-app/` — текущее Compose Multiplatform sandbox-приложение
+- `nodus-bduiI-app/sharedUI/` — общий UI-слой приложения
+- `nodus-bduiI-app/androidApp/` — Android launcher
+- `nodus-bduiI-app/desktopApp/` — Desktop launcher
+- `nodus-bduiI-app/webApp/` — Web launcher
+- `nodus-bduiI-app/iosApp/` — iOS launcher
+
+В этом репозитории sandbox-приложение используется как тестовый клиент для сценария:
+
+`Проект -> Контракт -> Версия -> Экран -> Построить -> Рендер формы по JSON-схеме`.
+
+## Текущий фокус
+
+План работ зафиксирован в основном workspace Nodus:
+
+- `tasks/prd_06_cmp-sandbox-and-json-form-runtime/`
+- `doc/nodus-bdui-cmp-work-report.md`
+
+Целевое направление:
+
+1. добавить selector screen для выбора `project / contract / version / screen`;
+2. добавить экран рендера по кнопке `Построить`;
+3. выделить внутри приложения reusable CMP runtime library для parse/validate/render pipeline.
+
+## Запуск
+
+Все команды выполняются из каталога `nodus-bduiI-app/`.
+
+### Android
+
+```bash
+./gradlew :androidApp:assembleDebug
+```
+
+### Desktop
+
+```bash
+./gradlew :desktopApp:run
+```
+
+### Web
+
+```bash
+./gradlew :webApp:jsBrowserDevelopmentRun
+```
+
+### iOS
+
+Откройте `nodus-bduiI-app/iosApp/iosApp.xcodeproj` в Xcode и запустите стандартную конфигурацию.
+
+## Примечания
+
+1. Корневой `.gitignore` настроен для Gradle/KMP, IDE и platform build artifacts.
+2. Вложенный `nodus-bduiI-app/README.MD` описывает базовые команды шаблона приложения.
+3. Реализация runtime-библиотеки пока не добавлена и будет вноситься по PRD 06.

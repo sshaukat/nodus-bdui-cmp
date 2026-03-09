@@ -29,7 +29,7 @@ dependencyResolutionManagement {
     }
 }
 include(":sharedUI")
+include(":bduiRuntime")
 include(":androidApp")
 include(":desktopApp")
 include(":webApp")
-
