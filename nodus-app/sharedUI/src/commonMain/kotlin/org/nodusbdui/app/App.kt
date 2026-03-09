@@ -50,9 +50,9 @@ import dev.nodus.bdui.runtime.model.BduiOpenUrlAction
 import dev.nodus.bdui.runtime.parser.DefaultBduiRuntimeEngine
 import dev.nodus.bdui.runtime.render.BduiScreen
 import kotlinx.coroutines.launch
-import nodus_bdui_app.sharedui.generated.resources.Res
-import nodus_bdui_app.sharedui.generated.resources.ic_dark_mode
-import nodus_bdui_app.sharedui.generated.resources.ic_light_mode
+import nodus_app.sharedui.generated.resources.Res
+import nodus_app.sharedui.generated.resources.ic_dark_mode
+import nodus_app.sharedui.generated.resources.ic_light_mode
 import org.jetbrains.compose.resources.vectorResource
 import org.nodusbdui.app.sandbox.FakeRegistryGateway
 import org.nodusbdui.app.sandbox.RegistryGateway

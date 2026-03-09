@@ -4,12 +4,13 @@
 
 ## Структура
 
-- `nodus-bduiI-app/` — текущее Compose Multiplatform sandbox-приложение
-- `nodus-bduiI-app/sharedUI/` — общий UI-слой приложения
-- `nodus-bduiI-app/androidApp/` — Android launcher
-- `nodus-bduiI-app/desktopApp/` — Desktop launcher
-- `nodus-bduiI-app/webApp/` — Web launcher
-- `nodus-bduiI-app/iosApp/` — iOS launcher
+- `nodus-app/` — текущее Compose Multiplatform sandbox-приложение
+- `nodus-app/sharedUI/` — общий UI-слой приложения
+- `nodus-app/androidApp/` — Android launcher
+- `nodus-app/desktopApp/` — Desktop launcher
+- `nodus-app/webApp/` — Web launcher
+- `nodus-app/iosApp/` — iOS launcher
+- `bduiRuntime/` — отдельный runtime-модуль для парсинга и рендера JSON-схем
 
 В этом репозитории sandbox-приложение используется как тестовый клиент для сценария:
 
@@ -37,7 +38,7 @@
 
 ## Запуск
 
-Все команды выполняются из каталога `nodus-bduiI-app/`.
+Все команды выполняются из каталога `nodus-app/`.
 
 ### Android
 
@@ -59,10 +60,10 @@
 
 ### iOS
 
-Откройте `nodus-bduiI-app/iosApp/iosApp.xcodeproj` в Xcode и запустите стандартную конфигурацию.
+Откройте `nodus-app/iosApp/iosApp.xcodeproj` в Xcode и запустите стандартную конфигурацию.
 
 ## Примечания
 
 1. Корневой `.gitignore` настроен для Gradle/KMP, IDE и platform build artifacts.
-2. Вложенный `nodus-bduiI-app/README.MD` описывает базовые команды шаблона приложения.
-3. Реализация runtime-библиотеки добавлена как модуль `nodus-bduiI-app/bduiRuntime`.
+2. Вложенный `nodus-app/README.MD` описывает базовые команды sandbox-приложения.
+3. Реализация runtime-библиотеки вынесена в отдельный каталог `bduiRuntime/` на уровне репозитория.

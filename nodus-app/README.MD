@@ -3,7 +3,7 @@
 This sandbox now targets a two-layer setup:
 
 - `sharedUI` as the application shell;
-- `bduiRuntime` as the reusable Compose Multiplatform runtime module for backend-driven schemas.
+- sibling `../bduiRuntime` as the reusable Compose Multiplatform runtime module for backend-driven schemas.
 
 Current sandbox flow:
 
@@ -40,6 +40,8 @@ Run the browser application: `./gradlew :webApp:jsBrowserDevelopmentRun`
 Run the browser application: `./gradlew :webApp:wasmJsBrowserDevelopmentRun`  
 
 ### Runtime Module
+
+Runtime module lives outside the app folder: `../bduiRuntime`
 
 Run runtime tests: `./gradlew :bduiRuntime:allTests`
 

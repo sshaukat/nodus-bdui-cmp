@@ -1,4 +1,4 @@
-rootProject.name = "Nodus-BDUI-App"
+rootProject.name = "nodus-app"
 
 pluginManagement {
     repositories {
@@ -30,6 +30,7 @@ dependencyResolutionManagement {
 }
 include(":sharedUI")
 include(":bduiRuntime")
+project(":bduiRuntime").projectDir = file("../bduiRuntime")
 include(":androidApp")
 include(":desktopApp")
 include(":webApp")
