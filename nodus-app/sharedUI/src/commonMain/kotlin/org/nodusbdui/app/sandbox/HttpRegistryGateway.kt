@@ -1,7 +1,7 @@
 package org.nodusbdui.app.sandbox
 
-import dev.nodus.bdui.runtime.api.BduiSchemaPayload
-import dev.nodus.bdui.runtime.model.BduiRegistryContext
+import dev.nodus.parser.api.BduiSchemaPayload
+import dev.nodus.parser.model.BduiRegistryContext
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get

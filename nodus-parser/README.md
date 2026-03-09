@@ -13,7 +13,7 @@ The module is intentionally placed outside the app folder so that JSON schema pa
 
 ## Public API
 
-Main entry points live under `dev.nodus.bdui.runtime.api`:
+Main entry points live under `dev.nodus.parser.api`:
 
 - `BduiRuntimeEngine`
 - `BduiSchemaPayload`

@@ -50,7 +50,7 @@ kotlin {
 }
 
 android {
-    namespace = "dev.nodus.bdui.runtime"
+    namespace = "dev.nodus.parser"
     compileSdk = 36
 
     defaultConfig {

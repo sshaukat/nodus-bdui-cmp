@@ -1,4 +1,4 @@
-package dev.nodus.bdui.runtime.model
+package dev.nodus.parser.model
 
 sealed interface BduiAction {
     val type: String

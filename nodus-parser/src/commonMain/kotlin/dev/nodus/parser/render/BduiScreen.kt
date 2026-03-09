@@ -1,4 +1,4 @@
-package dev.nodus.bdui.runtime.render
+package dev.nodus.parser.render
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -22,22 +22,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import dev.nodus.bdui.runtime.api.BduiActionMeta
-import dev.nodus.bdui.runtime.api.BduiRenderSession
-import dev.nodus.bdui.runtime.model.BduiAction
-import dev.nodus.bdui.runtime.model.BduiBoxNode
-import dev.nodus.bdui.runtime.model.BduiButtonNode
-import dev.nodus.bdui.runtime.model.BduiColumnNode
-import dev.nodus.bdui.runtime.model.BduiInputNode
-import dev.nodus.bdui.runtime.model.BduiLayout
-import dev.nodus.bdui.runtime.model.BduiLogAction
-import dev.nodus.bdui.runtime.model.BduiNavigateAction
-import dev.nodus.bdui.runtime.model.BduiNode
-import dev.nodus.bdui.runtime.model.BduiOpenUrlAction
-import dev.nodus.bdui.runtime.model.BduiRowNode
-import dev.nodus.bdui.runtime.model.BduiSpacerNode
-import dev.nodus.bdui.runtime.model.BduiTextNode
-import dev.nodus.bdui.runtime.model.BduiUnsupportedNode
+import dev.nodus.parser.api.BduiActionMeta
+import dev.nodus.parser.api.BduiRenderSession
+import dev.nodus.parser.model.BduiAction
+import dev.nodus.parser.model.BduiBoxNode
+import dev.nodus.parser.model.BduiButtonNode
+import dev.nodus.parser.model.BduiColumnNode
+import dev.nodus.parser.model.BduiInputNode
+import dev.nodus.parser.model.BduiLayout
+import dev.nodus.parser.model.BduiLogAction
+import dev.nodus.parser.model.BduiNavigateAction
+import dev.nodus.parser.model.BduiNode
+import dev.nodus.parser.model.BduiOpenUrlAction
+import dev.nodus.parser.model.BduiRowNode
+import dev.nodus.parser.model.BduiSpacerNode
+import dev.nodus.parser.model.BduiTextNode
+import dev.nodus.parser.model.BduiUnsupportedNode
 
 @Composable
 fun BduiScreen(

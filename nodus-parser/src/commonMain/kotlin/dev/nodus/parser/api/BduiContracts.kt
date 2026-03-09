@@ -1,13 +1,13 @@
-package dev.nodus.bdui.runtime.api
+package dev.nodus.parser.api
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
-import dev.nodus.bdui.runtime.model.BduiAction
-import dev.nodus.bdui.runtime.model.BduiNode
-import dev.nodus.bdui.runtime.model.BduiParseDiagnostic
-import dev.nodus.bdui.runtime.model.BduiRegistryContext
-import dev.nodus.bdui.runtime.render.BduiScreen
+import dev.nodus.parser.model.BduiAction
+import dev.nodus.parser.model.BduiNode
+import dev.nodus.parser.model.BduiParseDiagnostic
+import dev.nodus.parser.model.BduiRegistryContext
+import dev.nodus.parser.render.BduiScreen
 
 data class BduiSchemaPayload(
     val screenId: String,

@@ -1,6 +1,6 @@
-package dev.nodus.bdui.runtime
+package dev.nodus.parser
 
-import dev.nodus.bdui.runtime.parser.DefaultBduiRuntimeEngine
+import dev.nodus.parser.parser.DefaultBduiRuntimeEngine
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
